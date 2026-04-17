@@ -33,8 +33,9 @@ const getSingleSurah = catchAsync(
 const searchAyahs = catchAsync(
   async (req: Request, res: Response) => {
     const q = String(req.query.q || "");
+    const surahId = req.query.surahId as unknown as number
 
-    const result = QuranService.searchAyahs(q);
+    const result = QuranService.searchAyahs(q, surahId);
 
     sendResponse(res, 200, {
       success: true,

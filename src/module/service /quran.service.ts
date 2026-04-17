@@ -35,13 +35,15 @@ const getSingleSurah = (id: number) => {
     verses,
   };
 };
-
-const searchAyahs = (query: string) => {
+const searchAyahs = (query: string, surah_id?: number | string) => {
   if (!query.trim()) return [];
 
   const results: any[] = [];
+  const targetId = surah_id ? Number(surah_id) : undefined;
 
   Object.keys(englishData).forEach((key) => {
+    if (targetId !== undefined && Number(key) !== targetId) return;
+
     englishData[key].forEach((item, index) => {
       if (
         item.text.toLowerCase().includes(query.toLowerCase())
